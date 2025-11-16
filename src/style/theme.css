@@ -1,0 +1,12 @@
+@theme {
+  --breakpoint-mobx: 480px;
+  --breakpoint-tab: 730px;
+  --breakpoint-tabx: 830px;
+  --breakpoint-tabxx: 960px;
+  --breakpoint-lap: 1080px;
+  --breakpoint-lapx: 1280px;
+  --breakpoint-desk: 1440px;
+  --breakpoint-deskx: 1600px;
+
+  --container-lapx: var(--breakpoint-lapx);
+}

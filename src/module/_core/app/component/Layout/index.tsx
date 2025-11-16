@@ -1,7 +1,7 @@
 import { ReactNode, memo } from "react";
 import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
-import '@/styles/globals.css';
+import '@/style/globals.css';
 
 interface MainLayoutProps {
   children?: ReactNode;
