@@ -8,5 +8,12 @@
   --breakpoint-desk: 1440px;
   --breakpoint-deskx: 1600px;
 
-  --container-lapx: var(--breakpoint-lapx);
+  --container-mobx: 480px;
+  --container-tab: 730px;
+  --container-tabx: 830px;
+  --container-tabxx: 960px;
+  --container-lap: 1080px;
+  --container-lapx: 1280px;
+  --container-desk: 1440px;
+  --container-deskx: 1600px;
 }

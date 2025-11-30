@@ -1,25 +1,32 @@
+"use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const MainHeader = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 70) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="h-20 w-full bg-white">
-      <div className="mx-auto h-full max-w-lapx px-4 flex items-center gap-3">
-        <div className="flex-1">
-          <img
-            src="https://carback.vn/wp-content/uploads/2024/09/logo-3carback.png"
-            alt="logo"
-            className="max-w-52"
-          />
-        </div>
-        <Link href="" className="font-bold text-lg hover:text-gray-700">Về Carback</Link>
-        <Link href="" className="font-bold text-lg hover:text-gray-700">Đi xe ghép</Link>
-        <Link href="" className="font-bold text-lg hover:text-gray-700">Trở thành đối tác Carback</Link>
-        <Link href="" className="font-bold text-lg hover:text-gray-700">Trung tâm hỗ trợ</Link>
-        <Link href="" className="font-bold text-lg hover:text-gray-700">Liên hệ</Link>
-        <button className="bg-red-600 text-white font-bold px-4 shadow rounded-xl hover:shadow-slate-400 cursor-pointer py-1.5 text-[13px] active:opacity-90">Liên hệ</button>
-      </div>
+    <div className="mx-auto px-2 h-[50px] tab:h-20 flex justify-between items-center max-w-lapx">
+      <div className="text-[#1FAEEB] font-bold text-2xl tab:text-4xl">Logo</div>
+      <button className="w-[100px] tab:w-[118px] h-[30px] tab:h-12 rounded-full bg-[#EFF6FF] text-[#2196F3] font-semibold tab:text-lg hover:bg-[#e0ecfa] cursor-pointer active:bg-[#EFF6FF]">
+        Đăng nhập
+      </button>
     </div>
   );
-};
+};0
 
 export default MainHeader;
