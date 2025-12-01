@@ -147,6 +147,39 @@ const HomeView = () => {
         </div>
       </div>
 
+      <div className="flex gap-20 items-center justify-center">
+        <div>
+          <div className="text-6xl font-bold leading-18">Tải ứng dụng</div>
+          <div className="mt-2 text-[#374151] text-lg leading-7">
+            để trải nghiệm các dịch vụ của chúng tôi
+          </div>
+          <div className="mt-5 flex items-center gap-5">
+            <img
+              src="./images/home/qr.png"
+              alt=""
+              className="size-[150px] min-w-[150px]"
+            />
+            <div>
+              <img
+                src="./images/home/google-play-download.png"
+                alt=""
+                className="w-[150px] min-w-[150px]"
+              />
+              <div className="flex gap-3 mt-3">
+                <img src="./images/home/star.png" alt="" className="size-7" />
+                <img src="./images/home/star.png" alt="" className="size-7" />
+                <img src="./images/home/star.png" alt="" className="size-7" />
+                <img src="./images/home/star.png" alt="" className="size-7" />
+                <img src="./images/home/star.png" alt="" className="size-7" />
+              </div>
+              <div className="mt-1 font-medium leading-6">
+                Đánh giá ứng dụng
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="./images/home/detail-app.png" alt="" className="w-[336px]" />
+      </div>
     </div>
   );
 };
