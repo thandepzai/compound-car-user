@@ -1,4 +1,4 @@
-import HomeView from "@/module/home/app/view";
+import HomeView from "module/home/app/view";
 
 const HomePage = () => <HomeView />;
 

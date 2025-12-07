@@ -1,4 +1,4 @@
-import { IconProps } from "@/module/_core/infras/config/type/icon";
+import { IconProps } from "module/_core/infras/config/type/icon";
 
 const BackIcon = ({ className = "w-6 h-6", color = "#000000" }: IconProps) => {
   return (

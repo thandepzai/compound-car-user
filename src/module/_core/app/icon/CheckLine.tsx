@@ -1,4 +1,4 @@
-import { IconProps } from "@/module/_core/infras/config/type/icon";
+import { IconProps } from "module/_core/infras/config/type/icon";
 
 const CheckLine = ({ className = "w-6 h-6", color = "#4B5563" }: IconProps) => {
   return (

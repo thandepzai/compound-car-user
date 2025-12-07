@@ -1,4 +1,4 @@
-import { IconProps } from "@/module/_core/infras/config/type/icon";
+import { IconProps } from "module/_core/infras/config/type/icon";
 
 const CartIcon = ({ className = "w-6 h-6", color = "#1FAEEB" }: IconProps) => {
   return (

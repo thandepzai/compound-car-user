@@ -1,9 +1,14 @@
-import CartIcon from "@/module/_core/app/component/icon/CartIcon";
-import CheckLine from "@/module/_core/app/component/icon/CheckLine";
+"use client";
+
+import CartIcon from "module/_core/app/icon/CartIcon";
+import CheckLine from "module/_core/app/icon/CheckLine";
+import { ComponentRef, useRef } from "react";
+import Banner from "./Banner";
 
 const HomeView = () => {
   return (
-    <div className="max-w-lapx mx-auto mt-5">
+    <div className="mx-auto max-w-[1210px]">
+      <Banner />
       <div
         className="h-[700px] rounded-3xl px-16 pt-32 flex gap-[101px]"
         style={{

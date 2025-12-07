@@ -3,7 +3,7 @@
 import { ReactNode, memo } from "react";
 import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
-import "@/style/globals.css";
+import "style/globals.css";
 import { usePathname } from "next/navigation";
 
 interface MainLayoutProps {
