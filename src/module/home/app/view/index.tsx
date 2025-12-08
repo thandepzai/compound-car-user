@@ -4,11 +4,13 @@ import CartIcon from "module/_core/app/icon/CartIcon";
 import CheckLine from "module/_core/app/icon/CheckLine";
 import { ComponentRef, useRef } from "react";
 import Banner from "./Banner";
+import ListService from "./ListService";
 
 const HomeView = () => {
   return (
     <div className="mx-auto max-w-[1210px]">
       <Banner />
+      <ListService />
       <div
         className="h-[700px] rounded-3xl px-16 pt-32 flex gap-[101px]"
         style={{
