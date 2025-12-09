@@ -33,7 +33,7 @@ const Banner = () => {
           background: `linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, #93C5FD 50%, #1FAEEB 100%)`,
         }}
       />
-      <div className=" mt-10 lap:mt-32 flex flex-col lap:flex-row gap-12 tab:gap-16 lapx:gap-25 lap:mx-10 relative z-2 max-lap:items-center lap:justify-center">
+      <div className="h-full mt-10 lap:mt-32 flex flex-col lap:flex-row gap-12 tab:gap-16 lapx:gap-25 lap:mx-10 relative z-2 max-lap:items-center justify-between lap:justify-center">
         <div className="flex flex-col gap-8 text-[#F9FAFB] max-tab:mx-4 tab:w-[460px] lap:w-[550px]">
           <div className="flex items-center gap-2">
             <img
