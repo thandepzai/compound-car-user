@@ -1,6 +1,7 @@
 "use client";
 
 import Banner from "./Banner";
+import GuideSection from "./GuideSection";
 import ListService from "./ListService";
 
 const HomeView = () => {
@@ -8,6 +9,7 @@ const HomeView = () => {
     <div className="mx-auto max-w-[1210px]">
       <Banner />
       <ListService />
+      <GuideSection />
       <div className="mt-20 max-w-lap mx-auto flex gap-16 items-center">
         <div className="size-[400px] bg-blue-400 rounded-lg"></div>
         <div className="flex flex-col gap-4 flex-1">
