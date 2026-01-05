@@ -1,19 +1,13 @@
 @theme {
-  --breakpoint-mobx: 480px;
-  --breakpoint-tab: 730px;
-  --breakpoint-tabx: 830px;
-  --breakpoint-tabxx: 960px;
-  --breakpoint-lap: 1080px;
-  --breakpoint-lapx: 1280px;
-  --breakpoint-desk: 1440px;
-  --breakpoint-deskx: 1600px;
+    --breakpoint-mobx: 480px;
+    --breakpoint-tab: 768px;
+    --breakpoint-lap: 1024px;
+    --breakpoint-desk: 1280px;
 
-  --container-mobx: 480px;
-  --container-tab: 730px;
-  --container-tabx: 830px;
-  --container-tabxx: 960px;
-  --container-lap: 1080px;
-  --container-lapx: 1280px;
-  --container-desk: 1440px;
-  --container-deskx: 1600px;
+    --container-mobx: 480px;
+    --container-tab: 768px;
+    --container-lap: 1024px;
+    --container-desk: 1280px;
+
+    --bg-primary-original-default: #1FAEEB;
 }

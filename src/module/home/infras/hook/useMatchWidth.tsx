@@ -10,7 +10,7 @@ export const useMatchWidth = (
     const checkWidth = () => {
       if (!ref.current) return;
       const elementWidth = ref.current.getBoundingClientRect().width;
-      setIsMatched(elementWidth < width);
+      setIsMatched(elementWidth <= width);
     };
 
     checkWidth();
