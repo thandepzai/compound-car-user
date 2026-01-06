@@ -1,12 +1,17 @@
+import { VerifyRecaptchaData } from "@module/auth/domain/dto/auth";
 import clsx from "clsx";
-import { ChangeEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { IoMdRemove } from "react-icons/io";
 
 interface OtpInputProps {
-    phone: string;
+    recaptchaData: VerifyRecaptchaData;
+    onClose: () => void;
 }
-const OtpInput = ({ phone }: OtpInputProps) => {
+const OtpInput = ({ recaptchaData, onClose }: OtpInputProps) => {
+    const { phoneNumber, expiresAt, sessionId } = recaptchaData;
+
     const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
+
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
     const onChange = (index: number, value: string) => {
@@ -54,8 +59,8 @@ const OtpInput = ({ phone }: OtpInputProps) => {
             </div>
             <div className="flex flex-col gap-5">
                 <div className="text-[#4B5563]">
-                    Chúng tôi vừa gửi 1 tin nhắn văn bản gồm mã xác thực 6 chữ số đến {"*".repeat(phone.length - 3)}
-                    {phone.slice(-3)} .
+                    Chúng tôi vừa gửi 1 tin nhắn văn bản gồm mã xác thực 6 chữ số đến {"*".repeat(phoneNumber.length - 3)}
+                    {phoneNumber.slice(-3)} .
                 </div>
                 <div className="h-10 flex items-center gap-4">
                     <div className="w-20.5 h-10.5 grid grid-cols-2 border rounded-lg border-[#E5E7EB]">

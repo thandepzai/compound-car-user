@@ -6,6 +6,7 @@ import "style/globals.css";
 import { usePathname } from "next/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toast } from "@lib/component/Toast/Toast";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -28,6 +29,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         <QueryClientProvider client={queryClient}>
             <MainHeader />
             {children}
+            <Toast />
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     );

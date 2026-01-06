@@ -43,14 +43,13 @@ const contextClass = {
     }
 };
 
-const CloseButton = () => (
-    <button className="Toastify__close-button" type="button" aria-label="close">
-        <svg aria-hidden="true" viewBox="0 0 14 16">
-            <path
-                fillRule="evenodd"
-                d="M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z"
-            ></path>
-        </svg>
+const CloseButton = ({ closeToast }: any) => (
+    <button
+        onClick={closeToast}
+        className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition"
+        aria-label="close"
+    >
+        ✕
     </button>
 );
 
@@ -58,16 +57,12 @@ const Msg = ({ title = "Thông báo", description = "Mô tả", type }: ShowToas
     const context = contextClass[type ?? ToastType.DEFAULT];
 
     return (
-        <div className={`${context.bg} p-6`}>
-            <div className="flex">
-                <div className="pr-2">
-                    <context.Icon className="h-6 w-6" color={context.color} type="fill" />
-                </div>
-                <div>
-                    <p className={`${context.title} font-bold flex`}>{title}</p>
-                    <p className="text-gray-600 py-1">{description}</p>
-                </div>
+        <div className="p-4 max-w-[350px]">
+            <div className="mt-0.5 flex gap-2 items-center">
+                <context.Icon className="h-6 w-6" color={context.color} type="fill" />
+                <p className={`font-semibold ${context.title}`}>{title}</p>
             </div>
+            {description && <p className="text-gray-500 mt-2 ml-8">{description}</p>}
         </div>
     );
 };
@@ -80,19 +75,16 @@ export const Toast = () => {
     return (
         <ToastContainer
             position="bottom-left"
-            icon={false}
             autoClose={3000}
             hideProgressBar={false}
-            newestOnTop
             closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggablePercent={50}
             pauseOnHover
+            icon={false}
             closeButton={CloseButton}
-            progressClassName={({ type, defaultClassName }: any) => {
-                return `${defaultClassName} ${contextClass[type ?? ToastType.DEFAULT].progress}`;
-            }}
+            toastClassName={() => "rounded shadow-lg border border-gray-100 overflow-hidden p-0 bg-white"}
+            progressClassName={(context) =>
+                `${context?.defaultClassName} ${contextClass[context?.type ?? ToastType.DEFAULT].progress}`
+            }
         />
     );
 };

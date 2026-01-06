@@ -1,15 +1,17 @@
+import { showToast } from "@lib/component/Toast/Toast";
+import { ToastType } from "@lib/component/Toast/type";
 import { ActionRecaptcha } from "@module/auth/domain/config/type/actionRecaptcha";
+import { VerifyRecaptchaData } from "@module/auth/domain/dto/auth";
 import { AuthService } from "@module/auth/domain/service/auth";
-import clsx from "clsx";
-import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
+import Link from "next/link";
+import clsx from "clsx";
 
 interface PhoneInputProps {
-    setStep: Dispatch<SetStateAction<"phone" | "otp">>;
-    phone: string;
-    setPhone: Dispatch<SetStateAction<string>>;
+    setRecaptchaData: Dispatch<SetStateAction<VerifyRecaptchaData | undefined>>;
 }
-const PhoneInput = ({ setStep, phone, setPhone }: PhoneInputProps) => {
+const PhoneInput = ({ setRecaptchaData }: PhoneInputProps) => {
+    const [phone, setPhone] = useState("");
     const [focus, setFocus] = useState(false);
     const [error, setError] = useState("");
 
@@ -29,16 +31,17 @@ const PhoneInput = ({ setStep, phone, setPhone }: PhoneInputProps) => {
             const captchaToken = await grecaptcha.enterprise.execute(process.env.RECAPTCHA_KEY, {
                 action: ActionRecaptcha.LOGIN
             });
-            console.log("🚀 ~ onSubmit ~ captchaToken:", captchaToken);
             verifyRecaptchaMutation.mutate(
                 { phoneNumber: phone, captchaToken, userAction: ActionRecaptcha.LOGIN },
                 {
                     onSuccess: (data) => {
-                        console.log("🚀 ~ onSubmit ~ data:", data);
-                        setStep("otp");
+                        setRecaptchaData(data);
                     },
                     onError: (error) => {
-                        console.log("🚀 ~ onSubmit ~ error:", error);
+                        showToast({
+                            type: ToastType.ERROR,
+                            description: "Đã xảy ra lỗi vui lòng thử lại"
+                        });
                     }
                 }
             );

@@ -1,9 +1,10 @@
-import { MutableRefObject } from "react";
+import type { RefObject } from "react";
 
 // remove all dirtyValues from object
-export const cleanObject = <T extends object>(object: any, dirtyValues: any[] = [undefined]): T => {
-    const newObject = {};
-    Object.keys(object).forEach(function (key) {
+export const cleanObject = <T extends Record<string, any>>(object: T, dirtyValues: any[] = [undefined]): Partial<T> => {
+    const newObject: Partial<T> = {};
+
+    (Object.keys(object) as Array<keyof T>).forEach((key) => {
         if (
             !dirtyValues.some((value) => {
                 if (Number.isNaN(value)) return Number.isNaN(object[key]);
@@ -14,7 +15,7 @@ export const cleanObject = <T extends object>(object: any, dirtyValues: any[] = 
         }
     });
 
-    return newObject as T;
+    return newObject;
 };
 
 // remove all dirtyValues from array
@@ -49,7 +50,7 @@ async () => {
 export const delay = (m: number) => new Promise((r) => setTimeout(r, m));
 
 // throttle by limit time, search throttle for more detail
-export const throttle = (lockRef: MutableRefObject<any>, callback: () => void, limit: number) => {
+export const throttle = (lockRef: RefObject<any>, callback: () => void, limit: number) => {
     if (lockRef.current) return;
 
     callback();
@@ -60,7 +61,7 @@ export const throttle = (lockRef: MutableRefObject<any>, callback: () => void, l
 };
 
 // debound by delay time, search debound for more detail
-export const debounce = function (timeOutRef: MutableRefObject<any>, callback: () => void, delay: number) {
+export const debounce = function (timeOutRef: RefObject<any>, callback: () => void, delay: number) {
     if (timeOutRef.current) clearTimeout(timeOutRef.current);
     timeOutRef.current = setTimeout(callback, delay);
     return () => {

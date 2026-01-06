@@ -27,20 +27,20 @@ export const requester =
 
             if (Date.now() - beforeTime < 300) await delay(boundedTime);
 
-            if (data?.status || ignoreStatus) return await handleData(data as ISuccessResponse);
+            if (data?.meta.statusCode === 200 || ignoreStatus) return await handleData(data as ISuccessResponse);
             else {
-                const { errorCode, message, metaData } = data as IFailResponse;
-                throw new Exception(errorCode, message, metaData);
+                const { code, message, statusCode } = (data as IFailResponse).meta;
+                throw new Exception(code, message, statusCode);
             }
         } catch (error) {
             if (Date.now() - beforeTime < 300) await delay(boundedTime);
             if (error instanceof AxiosError) {
                 // console.log("ERROR", url, JSON.stringify(error.response?.data, null, 4));
                 const data: IFailResponse = error.response?.data;
-                if (data) throw new Exception(data.errorCode, data.message, data.metaData, error);
-                else throw new Exception(error.response?.status, error.message, undefined, error);
+                if (data) throw new Exception(data?.meta?.code, data?.meta?.message, data?.meta?.statusCode);
+                else throw new Exception(error.response?.status, error.message, undefined);
             } else if (error instanceof Exception) {
-                throw new Exception(error.code, error.message, error.metaData, error);
+                throw new Exception(error.code, error.message);
             } else throw error;
         }
     };

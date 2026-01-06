@@ -1,14 +1,19 @@
 export type ISuccessResponse<T = any> = {
-    status: true;
     data: T;
-    metaData?: any;
+    meta: {
+        code: number;
+        message: string;
+        statusCode: number;
+    };
 };
 
 export type IFailResponse = {
-    status: false;
-    errorCode: number;
-    message: string;
-    metaData?: any;
+    errorMessage: string;
+    meta: {
+        code: number;
+        message: string;
+        statusCode: number;
+    };
 };
 
 export type IResponseData = ISuccessResponse | IFailResponse;

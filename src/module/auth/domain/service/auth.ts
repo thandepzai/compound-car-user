@@ -19,4 +19,10 @@ export class AuthService {
             verifyOTPMutation
         };
     };
+
+    static logout = () => {
+        location.replace("/");
+        localStorage.removeItem("user");
+        localStorage.removeItem("ACCESS_TOKEN");
+    };
 }

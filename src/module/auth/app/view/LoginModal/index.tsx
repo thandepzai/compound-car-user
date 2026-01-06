@@ -3,6 +3,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import PhoneInput from "./PhoneInput";
 import OtpInput from "./OtpInput";
+import { VerifyRecaptchaData } from "@module/auth/domain/dto/auth";
 
 interface LoginModalHandler {
     open: () => void;
@@ -10,9 +11,7 @@ interface LoginModalHandler {
 
 const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [phone, setPhone] = useState("");
-
-    const [step, setStep] = useState<"phone" | "otp">("phone");
+    const [recaptchaData, setRecaptchaData] = useState<VerifyRecaptchaData>();
 
     useImperativeHandle(ref, () => ({
         open: () => setIsModalOpen(true)
@@ -20,8 +19,7 @@ const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
 
     const onClose = () => {
         setIsModalOpen(false);
-        setStep("phone");
-        setPhone("");
+        setRecaptchaData(undefined);
     };
 
     return (
@@ -35,10 +33,10 @@ const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
                     <IoCloseSharp className="size-6" />
                 </div>
             </div>
-            {step === "phone" ? (
-                <PhoneInput setStep={setStep} phone={phone} setPhone={setPhone} />
+            {!recaptchaData ? (
+                <PhoneInput setRecaptchaData={setRecaptchaData} />
             ) : (
-                <OtpInput phone={phone} />
+                <OtpInput recaptchaData={recaptchaData} onClose={onClose}/>
             )}
         </Modal>
     );

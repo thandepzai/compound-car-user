@@ -1,19 +1,15 @@
-import { AxiosResponse } from "axios";
-
 class Exception extends Error {
-    status: boolean;
+    message: string;
     code: number;
-    metaData: any;
-    response: AxiosResponse | undefined;
-    raw: Error | undefined;
+    statusCode: number;
 
-    constructor(code = 100, message = "Unknown Error", metaData?: any, raw?: Error) {
+    static DEFAULT_MESSAGE = "Unknown Error";
+
+    constructor(code = 401, message = Exception.DEFAULT_MESSAGE, statusCode = 400001) {
         super(message);
-        this.status = false;
         this.code = code;
         this.message = message;
-        this.metaData = metaData;
-        this.raw = raw;
+        this.statusCode = statusCode;
     }
 }
 

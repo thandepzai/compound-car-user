@@ -2,10 +2,10 @@ import type { NextConfig } from "next";
 
 const env = {
     production: {
-        compoundCarHost: "https://phuxeghep.com/api/v1"
+        compoundCarHost: "https://phuxeghep.com/api"
     },
     development: {
-        compoundCarHost: "https://phuxeghep.com/api/v1"
+        compoundCarHost: "https://phuxeghep.com/api"
     }
 };
 
