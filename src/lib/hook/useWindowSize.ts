@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { IGlobalStateOptions, useGlobalState } from "./useGlobalState";
+import { useGlobalState } from "./useGlobalState";
 import { useIsomorphicLayoutEffect } from "./useIsomorphicLayoutEffect";
 
 /*

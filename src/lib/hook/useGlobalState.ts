@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { isAsyncFunction } from "util/types";
+import { cleanObject } from "lib/util/functions";
+import { isAsyncFunction } from "lib/util/isType";
 
 /* README:
 
@@ -80,7 +81,7 @@ export const useGlobalState = <TState>(keys: any[], options: IGlobalStateOptions
         refetchOnMount: false,
         retry: false,
         ...initGlobalStateOptions,
-        ...options
+        ...(cleanObject(options) as IGlobalStateOptions<TState>)
     });
 
     const mutate = async <T extends TState>(param: any) => {

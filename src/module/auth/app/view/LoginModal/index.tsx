@@ -18,6 +18,9 @@ const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
     const [recaptchaData, setRecaptchaData] = useState<VerifyRecaptchaData>();
 
     const { verifyRecaptchaMutation } = AuthService.useAuthAction();
+    const { isLogin, user } = AuthService.useAuth();
+    console.log("🚀 ~ user:", user);
+    console.log("🚀 ~ isLogin:", isLogin);
 
     useImperativeHandle(ref, () => ({
         open: () => setIsModalOpen(true)
