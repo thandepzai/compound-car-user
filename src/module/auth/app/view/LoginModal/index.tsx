@@ -4,6 +4,10 @@ import { IoCloseSharp } from "react-icons/io5";
 import PhoneInput from "./PhoneInput";
 import OtpInput from "./OtpInput";
 import { VerifyRecaptchaData } from "@module/auth/domain/dto/auth";
+import { ActionRecaptcha } from "@module/auth/domain/config/type/actionRecaptcha";
+import { AuthService } from "@module/auth/domain/service/auth";
+import { showToast } from "@lib/component/Toast/Toast";
+import { ToastType } from "@lib/component/Toast/type";
 
 interface LoginModalHandler {
     open: () => void;
@@ -13,6 +17,8 @@ const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [recaptchaData, setRecaptchaData] = useState<VerifyRecaptchaData>();
 
+    const { verifyRecaptchaMutation } = AuthService.useAuthAction();
+
     useImperativeHandle(ref, () => ({
         open: () => setIsModalOpen(true)
     }));
@@ -20,6 +26,31 @@ const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
     const onClose = () => {
         setIsModalOpen(false);
         setRecaptchaData(undefined);
+    };
+
+    const getOTP = async (phoneNumber: string, onSuccess?: () => void) => {
+        if (!process.env.RECAPTCHA_KEY) return;
+
+        if (typeof window !== "undefined" && window.grecaptcha && window.grecaptcha.enterprise) {
+            const captchaToken = await grecaptcha.enterprise.execute(process.env.RECAPTCHA_KEY, {
+                action: ActionRecaptcha.LOGIN
+            });
+            verifyRecaptchaMutation.mutate(
+                { phoneNumber, captchaToken, userAction: ActionRecaptcha.LOGIN },
+                {
+                    onSuccess: (data) => {
+                        setRecaptchaData(data);
+                        onSuccess?.();
+                    },
+                    onError: () => {
+                        showToast({
+                            type: ToastType.ERROR,
+                            description: "Đã xảy ra lỗi vui lòng thử lại"
+                        });
+                    }
+                }
+            );
+        }
     };
 
     return (
@@ -34,9 +65,9 @@ const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
                 </div>
             </div>
             {!recaptchaData ? (
-                <PhoneInput setRecaptchaData={setRecaptchaData} />
+                <PhoneInput getOTP={getOTP} />
             ) : (
-                <OtpInput recaptchaData={recaptchaData} onClose={onClose}/>
+                <OtpInput recaptchaData={recaptchaData} onClose={onClose} getOTP={getOTP} />
             )}
         </Modal>
     );

@@ -1,23 +1,16 @@
-import { showToast } from "@lib/component/Toast/Toast";
-import { ToastType } from "@lib/component/Toast/type";
-import { ActionRecaptcha } from "@module/auth/domain/config/type/actionRecaptcha";
-import { VerifyRecaptchaData } from "@module/auth/domain/dto/auth";
-import { AuthService } from "@module/auth/domain/service/auth";
-import { Dispatch, SetStateAction, useState } from "react";
+import {  useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 
 interface PhoneInputProps {
-    setRecaptchaData: Dispatch<SetStateAction<VerifyRecaptchaData | undefined>>;
+    getOTP: (phoneNumber: string) => Promise<void>;
 }
-const PhoneInput = ({ setRecaptchaData }: PhoneInputProps) => {
+const PhoneInput = ({ getOTP }: PhoneInputProps) => {
     const [phone, setPhone] = useState("");
     const [focus, setFocus] = useState(false);
     const [error, setError] = useState("");
 
-    const { verifyRecaptchaMutation } = AuthService.useAuthAction();
-
-    const onSubmit = async () => {
+    const onSubmit = () => {
         const phoneRegex = /^[0-9]{9,11}$/;
 
         if (!phoneRegex.test(phone)) {
@@ -25,27 +18,7 @@ const PhoneInput = ({ setRecaptchaData }: PhoneInputProps) => {
             return;
         }
 
-        if (!process.env.RECAPTCHA_KEY) return;
-
-        if (typeof window !== "undefined" && window.grecaptcha && window.grecaptcha.enterprise) {
-            const captchaToken = await grecaptcha.enterprise.execute(process.env.RECAPTCHA_KEY, {
-                action: ActionRecaptcha.LOGIN
-            });
-            verifyRecaptchaMutation.mutate(
-                { phoneNumber: phone, captchaToken, userAction: ActionRecaptcha.LOGIN },
-                {
-                    onSuccess: (data) => {
-                        setRecaptchaData(data);
-                    },
-                    onError: (error) => {
-                        showToast({
-                            type: ToastType.ERROR,
-                            description: "Đã xảy ra lỗi vui lòng thử lại"
-                        });
-                    }
-                }
-            );
-        }
+        getOTP(phone);
     };
 
     return (
@@ -57,7 +30,7 @@ const PhoneInput = ({ setRecaptchaData }: PhoneInputProps) => {
             <div>
                 <div
                     className={clsx(
-                        "flex h-12 rounded-lg border  overflow-hidden",
+                        "flex h-12 rounded-lg border overflow-hidden",
                         !!error ? "border-red-500" : focus ? "border-[#1FAEEB]" : "border-[#D1D5DB]"
                     )}
                 >

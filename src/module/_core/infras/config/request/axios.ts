@@ -3,7 +3,7 @@ import { AuthEndpoint } from "@module/auth/infras/config/endpointUrl";
 import axios, { AxiosInstance } from "axios";
 import { showToast } from "lib/component/Toast/Toast";
 import { isOnServer } from "module/_core/infras/util/isOnServer";
-import { AuthService } from "module/auth/domain/service/auth";
+import { AuthService } from "@module/auth/domain/service/auth";
 const https = require("https");
 
 class AppRequest {

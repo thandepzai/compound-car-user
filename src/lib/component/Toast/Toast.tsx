@@ -57,7 +57,7 @@ const Msg = ({ title = "Thông báo", description = "Mô tả", type }: ShowToas
     const context = contextClass[type ?? ToastType.DEFAULT];
 
     return (
-        <div className="p-4 max-w-[350px]">
+        <div className="p-4 pr-8 max-w-[350px]">
             <div className="mt-0.5 flex gap-2 items-center">
                 <context.Icon className="h-6 w-6" color={context.color} type="fill" />
                 <p className={`font-semibold ${context.title}`}>{title}</p>

@@ -14,8 +14,7 @@ export class AuthApi {
     static async verifyRecaptcha(verifyRecaptcha: VerifyRecaptchaDTO) {
         return requester<VerifyRecaptchaData>({
             requestFunc: () => appRequest.mapServer.post(AuthEndpoint.verifyRecaptcha(), verifyRecaptcha),
-            handleData: (data: VerifyRecaptchaResponseDTO) => data.data,
-            
+            handleData: (data: VerifyRecaptchaResponseDTO) => data.data
         })();
     }
 
