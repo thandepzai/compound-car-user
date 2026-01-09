@@ -10,7 +10,7 @@ const HomeView = () => {
     return (
         <>
             <Banner />
-            <ListService />
+            {/* <ListService /> */}
             <GuideSection />
             <DownloadApp />
             <AppOutro />

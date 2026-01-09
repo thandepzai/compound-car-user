@@ -1,61 +1,62 @@
-import { useGlobalState } from "@lib/hook/useGlobalState";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { UserDTO, VerifyOTPDTO, VerifyRecaptchaDTO } from "../dto/auth";
 import { AuthApi } from "../api/auth";
-import { MeService } from "./me";
-import { useIsomorphicLayoutEffect } from "@lib/hook/useIsomorphicLayoutEffect";
-
-export interface AuthDTO {
-    user: UserDTO;
-    accessToken: string;
-}
 
 export class AuthService {
-    static AUTH_KEY = "AUTH_KEY";
+    static USER_KEY = "USER";
 
-    static useInitAuth = () => {
-        const { mutate } = this.useAuth(() => 0);
-        // const { verifyAuthMutation } = this.useAuthAction();
+    // Local Storage
+    static storage = {
+        getUser(): UserDTO | undefined {
+            if (typeof window === "undefined") return;
+            const raw = localStorage.getItem("user");
+            return raw ? (JSON.parse(raw) as UserDTO) : undefined;
+        },
 
-        useIsomorphicLayoutEffect(() => {
-            const auth = this.getAuth();
-            if (auth) {
-                mutate(auth);
-                // verifyAuthMutation.mutate();
-            }
-        }, []);
+        setUser(user: UserDTO) {
+            localStorage.setItem("user", JSON.stringify(user));
+        },
+
+        setToken(token: string) {
+            localStorage.setItem("ACCESS_TOKEN", token);
+        },
+
+        clear() {
+            localStorage.removeItem("user");
+            localStorage.removeItem("ACCESS_TOKEN");
+        }
     };
 
-    static useAuth = (select?: (state: AuthDTO | null) => any) => {
-        const { data, mutate } = useGlobalState<AuthDTO | null>([this.AUTH_KEY], {
-            initialData: null,
-            notifyOnChangeProps: ["data", "isPending"],
-            select
+    // Hook get User
+    static useUser = () => {
+        const { data: user, isFetching } = useQuery<UserDTO | undefined>({
+            queryKey: [AuthService.USER_KEY],
+            queryFn: () => AuthService.storage.getUser(),
+            staleTime: Infinity
         });
 
         return {
-            isLogin: !!data?.user,
-            user: data?.user,
-            accessToken: data?.accessToken,
-            mutate
+            user,
+            isLogin: !!user,
+            isFetching
         };
     };
 
+    // Auth Actions
     static useAuthAction = () => {
         const queryClient = useQueryClient();
-        const meAction = MeService.useMeAction();
 
         const verifyRecaptchaMutation = useMutation({
-            mutationFn: (verifyRecaptcha: VerifyRecaptchaDTO) => AuthApi.verifyRecaptcha(verifyRecaptcha)
+            mutationFn: (payload: VerifyRecaptchaDTO) => AuthApi.verifyRecaptcha(payload)
         });
 
         const verifyOTPMutation = useMutation({
-            mutationFn: (verifyOTP: VerifyOTPDTO) => AuthApi.verifyOTP(verifyOTP),
+            mutationFn: (payload: VerifyOTPDTO) => AuthApi.verifyOTP(payload),
+
             onSuccess: (data) => {
-                localStorage.setItem("user", JSON.stringify(data.user));
-                localStorage.setItem("ACCESS_TOKEN", data.accessToken);
-                queryClient.setQueryData([this.AUTH_KEY], data);
-                meAction.mutateLocal(data.user);
+                AuthService.storage.setToken(data.accessToken);
+                AuthService.storage.setUser(data.user);
+                queryClient.setQueryData([AuthService.USER_KEY], data.user);
             }
         });
 
@@ -65,18 +66,9 @@ export class AuthService {
         };
     };
 
-    static getAuth = () => {
-        if (typeof window === "undefined") return;
-        const user = MeService.getLocalUser();
-        const accessToken = localStorage.getItem("ACCESS_TOKEN");
-        if (user && accessToken) {
-            return { user, accessToken };
-        } else return null;
-    };
-
+    // Logout
     static logout = () => {
         location.replace("/");
-        localStorage.removeItem("user");
-        localStorage.removeItem("ACCESS_TOKEN");
+        AuthService.storage.clear();
     };
 }
