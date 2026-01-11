@@ -6,7 +6,7 @@ import {
     VerifyRecaptchaResponseDTO,
     VerifyOTPResponseDTO,
     VerifyRecaptchaData,
-    VerifyOTPData
+    UserSubscriptionDTO
 } from "../dto/auth";
 import { appRequest } from "@module/_core/infras/config/request/axios";
 
@@ -19,7 +19,7 @@ export class AuthApi {
     }
 
     static async verifyOTP(verifyOTP: VerifyOTPDTO) {
-        return requester<VerifyOTPData>({
+        return requester<UserSubscriptionDTO>({
             requestFunc: () => appRequest.mapServer.post(AuthEndpoint.verifyOTP(), verifyOTP),
             handleData: (data: VerifyOTPResponseDTO) => data.data
         })();

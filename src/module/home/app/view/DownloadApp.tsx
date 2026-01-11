@@ -1,6 +1,6 @@
 const DownloadApp = () => {
     return (
-        <div className="mt-16 tab:mt-20 flex flex-col gap-16 lap:gap-20 lap:flex-row lap:items-center lap:justify-center relative overflow-hidden">
+        <div className="mt-16 tab:mt-20 flex flex-col gap-11 lap:gap-20 lap:flex-row lap:items-center lap:justify-center relative overflow-hidden">
             <div className="absolute font-bold leading-18 text-[#1FAEEB] text-[217.32px] whitespace-nowrap overflow-visible opacity-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">Phụ xe ghép</div>
             <div className="relative z-10">
                 <div className="font-bold text-[#1FAEEB] text-4xl leading-10 tab:text-6xl tab:leading-18 max-lap:text-center">
@@ -22,7 +22,7 @@ const DownloadApp = () => {
                     </div>
                 </div>
             </div>
-            <img src="./images/home/detail-app.png" alt="" className="w-[60%] tab:w-[336px] max-lap:mx-auto relative z-10" />
+            <img src="./images/home/detail-app.png" alt="" className="w-[60%] tab:w-[336px] max-lap:mx-auto my-5 relative z-10" />
         </div>
     );
 };

@@ -1,9 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { UserDTO, VerifyOTPDTO, VerifyRecaptchaDTO } from "../dto/auth";
+import { UserDTO, UserSubscriptionDTO, VerifyOTPDTO, VerifyRecaptchaDTO } from "../dto/auth";
 import { AuthApi } from "../api/auth";
 
 export class AuthService {
     static USER_KEY = "USER";
+    static USER_SUBSCRIPTION_KEY = "USER_SUBSCRIPTION";
 
     // Local Storage
     static storage = {
@@ -13,8 +14,18 @@ export class AuthService {
             return raw ? (JSON.parse(raw) as UserDTO) : undefined;
         },
 
+        getUserSubscription(): UserSubscriptionDTO | undefined {
+            if (typeof window === "undefined") return;
+            const raw = localStorage.getItem("userSubscription");
+            return raw ? (JSON.parse(raw) as UserSubscriptionDTO) : undefined;
+        },
+
         setUser(user: UserDTO) {
             localStorage.setItem("user", JSON.stringify(user));
+        },
+
+        setUserSubscription(userSubscription: UserSubscriptionDTO) {
+            localStorage.setItem("userSubscription", JSON.stringify(userSubscription));
         },
 
         setToken(token: string) {
@@ -23,21 +34,39 @@ export class AuthService {
 
         clear() {
             localStorage.removeItem("user");
+            localStorage.removeItem("userSubscription");
             localStorage.removeItem("ACCESS_TOKEN");
         }
     };
 
     // Hook get User
     static useUser = () => {
-        const { data: user, isFetching } = useQuery<UserDTO | undefined>({
+        const userData = AuthService.storage.getUser() ?? null;
+
+        const { data: user, isFetching } = useQuery<UserDTO | null>({
             queryKey: [AuthService.USER_KEY],
-            queryFn: () => AuthService.storage.getUser(),
+            queryFn: () => userData,
             staleTime: Infinity
         });
 
         return {
-            user,
+            user: user,
             isLogin: !!user,
+            isFetching
+        };
+    };
+
+    static useUserSubscription = () => {
+        const userSubscriptionData = AuthService.storage.getUserSubscription() ?? null;
+
+        const { data: userSubscription, isFetching } = useQuery<UserSubscriptionDTO | null>({
+            queryKey: [AuthService.USER_SUBSCRIPTION_KEY],
+            queryFn: () => userSubscriptionData,
+            staleTime: Infinity
+        });
+
+        return {
+            userSubscription,
             isFetching
         };
     };
@@ -54,9 +83,12 @@ export class AuthService {
             mutationFn: (payload: VerifyOTPDTO) => AuthApi.verifyOTP(payload),
 
             onSuccess: (data) => {
-                AuthService.storage.setToken(data.accessToken);
                 AuthService.storage.setUser(data.user);
+                AuthService.storage.setUserSubscription(data);
+                AuthService.storage.setToken(data.accessToken);
+
                 queryClient.setQueryData([AuthService.USER_KEY], data.user);
+                queryClient.setQueryData([AuthService.USER_SUBSCRIPTION_KEY], data);
             }
         });
 

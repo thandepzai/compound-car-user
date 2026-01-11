@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagramSquare } from "react-icons/fa";
 const AppOutro = () => {
     return (
         <div className="mt-16 border-t border-[#F9FAFB] py-8" style={{ boxShadow: "0px 0px 4px 0px #00000026" }}>
-            <div className="text-xl leading-8 text-[#0A0A0A] font-bold text-center">LOGO</div>
+            <img src="/images/logo.svg" className="mx-auto" alt="" />
             <div className="mt-4 text-2xl leading-8 font-bold text-[#1FAEEB] text-center">
                 Hỗ Trợ Tài Xế Lái Xe Ghép
             </div>

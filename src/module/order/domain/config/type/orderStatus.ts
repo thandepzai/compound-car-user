@@ -1,0 +1,6 @@
+export enum OrderStatusEnum {
+    INIT = "INIT",
+    SUCCESS = "SUCCESS",
+    PAYMENT_PROCESSING = "PAYMENT_PROCESSING",
+    PAYMENT_FAILED = "PAYMENT_FAILED"
+}

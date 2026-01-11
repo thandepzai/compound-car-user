@@ -24,7 +24,7 @@ export interface VerifyOTPDTO {
     sessionId: string;
 }
 
-export interface VerifyOTPData {
+export interface UserSubscriptionDTO {
     user: UserDTO;
     plan: PlanDTO;
     subscription: SubscriptionDTO;
@@ -32,8 +32,7 @@ export interface VerifyOTPData {
     refreshToken: string;
 }
 
-export type VerifyOTPResponseDTO = ISuccessResponse<VerifyOTPData>;
-
+export type VerifyOTPResponseDTO = ISuccessResponse<UserSubscriptionDTO>;
 
 export interface UserDTO {
     id: number;
