@@ -72,7 +72,7 @@ const OrderView = () => {
                     Nâng cấp lên Gói Pro để sử dụng toàn bộ tính năng
                 </div>
                 <div className="tab:mt-8 font-bold leading-6 tab:text-lg tab:leading-7">Chọn loại gói Pro</div>
-                <div className="mt-3 flex gap-3">
+                <div className="mt-3 flex gap-3 overflow-x-auto pb-2">
                     {[1, 2, 3, 4].map((item, index) => {
                         const isActive = index + 1 === planId;
                         return (
@@ -80,7 +80,7 @@ const OrderView = () => {
                                 key={index}
                                 onClick={() => setPlanId(index + 1)}
                                 className={clsx(
-                                    "p-3 rounded-lg flex flex-col items-center gap-1 w-[142px] cursor-pointer select-none",
+                                    "p-3 rounded-lg flex flex-col items-center gap-1 min-w-[130px] tab:w-[142px] cursor-pointer select-none",
                                     isActive ? "bg-[#1FAEEB] text-white" : "bg-[#F3F4F6] text-[#6B7280]"
                                 )}
                             >
@@ -99,7 +99,7 @@ const OrderView = () => {
                     })}
                 </div>
 
-                <div className="mt-8 border border-[#F3F4F6] p-4 bg-[#F9FAFB] rounded-xl">
+                <div className="mt-6 border border-[#F3F4F6] p-3 tab:p-4 bg-[#F9FAFB] rounded-xl">
                     <div className="font-bold leading-6 tab:text-lg tab:leading-7 text-black">Thông tin tài khoản</div>
                     <div className="mt-4">
                         <div className="text-sm leading-5">Số điện thoại</div>
@@ -164,7 +164,7 @@ const OrderView = () => {
                     <div className="flex justify-between">
                         <div className="leading-6 tab:text-xl tab:leading-8 text-black font-bold">Tổng cộng:</div>
                         <div>
-                            <div className="font-bold text-2xl leading-8 tab:text-4xl tab:leading-10 text-[#1FAEEB]">
+                            <div className="font-bold text-2xl leading-8 tab:text-4xl tab:leading-10 text-[#1FAEEB] text-end">
                                 50.000 VNĐ
                             </div>
                             <div className="mt-1 text-[#4B5563] text-sm leading-5 tab:text-lg tab:leading-7">
@@ -180,7 +180,11 @@ const OrderView = () => {
                     </div>
                 </div>
                 <div className="mt-2 text-[#6B7280] leading-6 text-center max-tab:hidden">
-                    Bấm “Thanh toán” đồng nghĩa việc bạn đọc và đồng ý với Điều khoản dịch vụ.
+                    Bấm “Thanh toán” đồng nghĩa việc bạn đọc và đồng ý với 
+                    <span onClick={() => router.push("/policies")} className="hover:text-blue-400 cursor-pointer">
+                        Điều khoản dịch vụ
+                    </span>
+                    .
                 </div>
             </div>
         </div>

@@ -56,13 +56,13 @@ const PhoneInput = ({ getOTP }: PhoneInputProps) => {
                 </div>
                 {error && <div className="text-red-500 text-sm mt-1">{error}</div>}
                 <div className="my-4 h-px w-full bg-[#D1D5DB]" />
-                <div>
+                <div className="text-sm leading-5 text-[#4B5563]">
                     Trang web này được bảo vệ bởi reCAPTCHA và{" "}
-                    <Link href="https://policies.google.com/privacy" className="text-blue-500 hover:text-blue-400">
+                    <Link href="https://policies.google.com/privacy" className="text-[#1FAEEB] hover:opacity-85">
                         Chính sách quyền riêng tư
                     </Link>{" "}
                     và{" "}
-                    <Link href="https://policies.google.com/terms" className="text-blue-500 hover:text-blue-400">
+                    <Link href="https://policies.google.com/terms" className="text-[#1FAEEB] hover:opacity-85">
                         Điều khoản dịch vụ
                     </Link>{" "}
                     của Google được áp dụng.

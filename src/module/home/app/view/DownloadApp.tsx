@@ -9,7 +9,7 @@ const DownloadApp = () => {
                 <div className="mt-2 text-[#374151] leading-6 tab:text-lg tab:leading-7 max-lap:text-center">
                     Để trải nghiệm các dịch vụ của chúng tôi
                 </div>
-                <img src="./images/home/download-logo.png" className="w-[270px] h-[90px] mt-6 max-lap:mx-auto" alt="" />
+                <img src="./images/home/download-logo.png" className="w-[241px] h-20 mt-6 max-lap:mx-auto" alt="" />
                 <div className="grid max-tab:px-4 max-tab:gap-3 tab:grid-cols-2 mt-6 w-[360px] tab:w-[482px] mx-auto">
                     <div>
                         <div className="font-medium text-black leading-6 tab:text-lg tab:leading-7">Ứng dụng được đánh giá</div>

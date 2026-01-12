@@ -7,7 +7,7 @@ const AppOutro = () => {
             <div className="mt-4 text-2xl leading-8 font-bold text-[#1FAEEB] text-center">
                 Hỗ Trợ Tài Xế Lái Xe Ghép
             </div>
-            <div className="mt-4 leading-6 text-[#4B5563] text-center">
+            <div className="mt-4 leading-6 text-[#4B5563] text-center mx-4">
                 Tự động bắt khách – Soạn tin nhanh – Tránh trôi tin nhắn
             </div>
             <img src="./images/home/google-play-download.png" className="w-[150px] h-[60px] mt-10 mx-auto" alt="" />
