@@ -11,7 +11,7 @@ const env = {
 
 type AppEnv = "production" | "development";
 
-const APP_ENV = process.env.APP_ENV as AppEnv;
+const APP_ENV = process.env.APP_ENV as AppEnv ?? "production";
 
 const nextConfig: NextConfig = {
     /* config options here */
