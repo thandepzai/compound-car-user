@@ -30,13 +30,12 @@ const MainHeader = () => {
     return (
         <header
             className={clsx(
-                "sticky top-0 left-0 w-full z-50 transition-all duration-300 bg-white border border-[#F9FAFB]",
-                pathname !== "/" ? "max-tab:hidden" : ""
+                "sticky! top-0 left-0 w-full z-50 transition-all duration-300 bg-white border border-[#F9FAFB]",
+                pathname !== "/" ? "max-tab:hidden!" : ""
             )}
         >
             <div className="mx-auto px-4 tab:px-6 lap:px-12 desk:px-4 h-[72px] tab:h-20 flex items-center justify-between max-w-[1184px]">
                 <img onClick={() => router.push("/")} src="/images/logo.svg" alt="" className="w-[186px] h-12" />
-
                 {!isFetching ? (
                     !!userSubscription ? (
                         <div className="relative group">

@@ -42,7 +42,7 @@ const OrderView = () => {
                 onSuccess: (data) => {
                     window.location.href = data;
                 },
-                onError: (error: any) => {
+                onError: () => {
                     showToast({
                         type: ToastType.ERROR,
                         description: "Đã có lỗi xảy ra vui lòng thử lại"
@@ -158,7 +158,7 @@ const OrderView = () => {
                     Bấm “Thanh toán” đồng nghĩa việc bạn đọc và đồng ý với Điều khoản dịch vụ.
                 </div>
                 <div
-                    className="max-tab:w-screen max-tab:-ml-4 max-tab:p-4 max-tab:pb-10 mt-8"
+                    className="max-tab:w-screen max-tab:-ml-4 max-tab:p-4 max-tab:pb-10 mt-8 tab:shadow-none!"
                     style={{ boxShadow: "0px 0px 4px 0px #00000026" }}
                 >
                     <div className="flex justify-between">
