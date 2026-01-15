@@ -199,7 +199,7 @@ const ListService = () => {
                             <div className="absolute w-[146px] h-12 rounded-full bg-white/50 left-5 top-[-27px] flex-center overflow-hidden shadow">
                                 <div className="w-[136px] h-10 rounded-full bg-[#1FAEEB] flex-center gap-2">
                                     <div className="text-sm leading-5 font-bold text-white">Phổ biến nhất</div>
-                                    <img src="./images/home/star-popular.svg" className="size-4" alt="" />
+                                    <img src="/images/home/star-popular.svg" className="size-4" alt="" />
                                 </div>
                             </div>
                             <div
@@ -356,8 +356,8 @@ const ListService = () => {
                     >
                         <img src="/images/home/bg-feature.svg" className="absolute size-full top-0 left-0 z-0" alt="" />
                         <div className="flex-center gap-2 relative z-10">
-                            <img src="/images/home/pro.svg" className="w-[37px] h-5" alt="" />
-                            <div className="font-bold leading-6">Kích hoạt tính năng</div>
+                            <img src="/images/home/pro.svg" className="w-10" alt="" />
+                            <div className="font-bold leading-6 text-xl">Kích hoạt tính năng</div>
                         </div>
                         <div className="mt-5 flex flex-col gap-4 relative z-10">
                             <div className="flex items-center gap-2">

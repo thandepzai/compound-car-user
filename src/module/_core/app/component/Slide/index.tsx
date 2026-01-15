@@ -18,6 +18,9 @@ interface DrawerSlideProps {
     onClose?: () => void;
 }
 
+const SWIPE_OFFSET = 80;
+const SWIPE_VELOCITY = 500;
+
 export default function DrawerSlide({
     open,
     children,
@@ -92,6 +95,19 @@ export default function DrawerSlide({
                         animate="visible"
                         exit="exit"
                         transition={{ duration, ease: "easeOut" }}
+                        // 👉 Swipe back (only for right drawer)
+                        drag={direction === "right" ? "x" : false}
+                        dragDirectionLock
+                        dragConstraints={{ left: 0, right: 0 }}
+                        onDragEnd={(_, info) => {
+                            if (direction !== "right") return;
+
+                            const shouldClose = info.offset.x > SWIPE_OFFSET || info.velocity.x > SWIPE_VELOCITY;
+
+                            if (shouldClose) {
+                                onClose?.();
+                            }
+                        }}
                         style={{
                             position: "fixed",
                             top: direction === "up" ? undefined : 0,
@@ -102,7 +118,8 @@ export default function DrawerSlide({
                             height: direction === "up" || direction === "down" ? height : "100vh",
                             background: "#fff",
                             zIndex: zIndex + 1,
-                            overflow: "auto"
+                            overflow: "auto",
+                            touchAction: direction === "right" ? "pan-y" : "auto"
                         }}
                     >
                         {children}

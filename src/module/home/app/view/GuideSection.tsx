@@ -40,7 +40,7 @@ const GuideSection = () => {
                 </div>
                 <div className="max-lap:w-full lap:flex-1 flex flex-col gap-4">
                     <div className="rounded-xl border border-[#2196F333] text-[#1FAEEB] relative">
-                        <img src="./images/home/parameter-bg.png" className="absolute w-full h-full" alt="" />
+                        <img src="/images/home/parameter-bg.png" className="absolute w-full h-full" alt="" />
                         <div className="relative z-10 flex py-5 px-4">
                             <div className="w-1/2 text-center">
                                 <div className="text-2xl leading-8 desk:text-3xl desk:leading-9 font-bold">1000 +</div>
@@ -51,7 +51,7 @@ const GuideSection = () => {
                             <div className="h-16 bg-white min-w-px" />
                             <div className="w-1/2 text-center">
                                 <div className="text-2xl leading-8 desk:text-3xl desk:leading-9 font-bold flex-center gap-3">
-                                    4.8/ 5.0 <img src="./images/home/star-app.svg" className="size-8" alt="" />
+                                    4.8/ 5.0 <img src="/images/home/star-app.svg" className="size-8" alt="" />
                                 </div>
                                 <div className="mt-2 font-medium leading-6 desk:text-lg desk:leading-7 line-clamp-1">
                                     Ứng dụng được đánh giá

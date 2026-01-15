@@ -36,30 +36,32 @@ const Banner = () => {
             <div className="h-full pt-10 lap:pt-32 lap:pl-10 lap:pr-[58px] desk:px-16 flex flex-col lap:flex-row gap-12 tab:gap-16 desk:gap-25 relative z-2 lap:justify-center max-lap:items-center">
                 <div className="flex flex-col gap-4 tab:gap-8 text-[#F9FAFB] max-tab:mx-4 tab:w-[460px] desk:w-[550px]">
                     <div className="flex items-center gap-2">
-                        <img src="./images/home/google-play.png" alt="" className="size-8" />
+                        <img src="/images/home/google-play.png" alt="" className="size-8" />
                         <div className="font-medium leading-6">Tải App Trên Ch Play</div>
                     </div>
-                    <div className="font-bold text-3xl tab:text-5xl leading-9 tab:leading-[60px]">Ứng Dụng Hỗ Trợ Tài Xế Lái Xe Ghép</div>
+                    <div className="font-bold text-3xl tab:text-5xl leading-9 tab:leading-[60px]">
+                        Ứng Dụng Hỗ Trợ Tài Xế Lái Xe Ghép
+                    </div>
                     <div className="text-lg font-medium leading-6 tab:leading-7">
                         Tối ưu hiệu suất – Tăng độ an toàn – Không bỏ lỡ khách hàng.
                     </div>
                     <div className="flex flex-col gap-4">
                         <div className="flex gap-2 items-center">
-                            <img className="w-6" src="./images/home/check.png" alt="" />
+                            <img className="w-6" src="/images/home/check.png" alt="" />
                             <span className="font-medium leading-6">Shortcut Trả Lời Zalo Tự Động</span>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <img className="w-6" src="./images/home/check.png" alt="" />
+                            <img className="w-6" src="/images/home/check.png" alt="" />
                             <span className="font-medium leading-6">Vuốt Trả Lời Nhanh</span>
                         </div>
                         <div className="flex gap-2 items-center">
-                            <img className="w-6" src="./images/home/check.png" alt="" />
+                            <img className="w-6" src="/images/home/check.png" alt="" />
                             <span className="font-medium leading-6">An Toàn & Tiện Lợi</span>
                         </div>
                     </div>
                 </div>
                 <img
-                    src="./images/home/phone.png"
+                    src="/images/home/phone.png"
                     alt=""
                     className="w-[298px] max-tab:h-[408px] tab:w-[402px] desk:w-[428px] lap:h-[572px]"
                 />

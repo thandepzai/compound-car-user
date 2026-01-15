@@ -119,7 +119,7 @@ const OrderView = () => {
                             className="mt-1 border border-[#D1D5DB] rounded-lg h-12 overflow-hidden flex"
                             style={{ boxShadow: "0px 1px 2px 0px #0A0D120D" }}
                         >
-                            <div className="flex items-center p-3 pr-1.5 bg-[#F3F4F6] border-r border-[#D1D5DB] gap-2">
+                            <div className="flex items-center p-3 pr-1.5 bg-[#F3F4F6] border-r border-[#D1D5DB] gap-2 min-w-[98px]">
                                 <img src="/images/vietnamphone.svg" className="w-[35px] h-6" alt="" />
                                 <div className="text-sm leading-5 text-[#1F2937]">(+84)</div>
                             </div>
@@ -145,7 +145,7 @@ const OrderView = () => {
                             className="mt-1 border border-[#D1D5DB] rounded-lg h-12 overflow-hidden flex"
                             style={{ boxShadow: "0px 1px 2px 0px #0A0D120D" }}
                         >
-                            <div className="flex items-center p-3 pr-1.5 bg-[#F3F4F6] border-r border-[#D1D5DB] gap-2">
+                            <div className="flex items-center p-3 pr-1.5 bg-[#F3F4F6] border-r border-[#D1D5DB] gap-2 min-w-[98px]">
                                 <img src="/images/vietnamphone.svg" className="w-[35px] h-6" alt="" />
                                 <div className="text-sm leading-5 text-[#1F2937]">(+84)</div>
                             </div>

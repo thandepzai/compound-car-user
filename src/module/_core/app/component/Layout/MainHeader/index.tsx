@@ -13,11 +13,13 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import InfoSlide from "@module/auth/app/component/InfoSlide";
 import HistoryPaymentModal from "@module/auth/app/component/HistoryPaymentModal";
 import clsx from "clsx";
+import HistoryPaymentSlide from "@module/auth/app/component/HistoryPaymentSlide";
 
 const MainHeader = () => {
     const pathname = usePathname();
     const router = useRouter();
     const loginSlideRef = useRef<ComponentRef<typeof LoginSlide>>(null);
+    const historyPaymentSlideRef = useRef<ComponentRef<typeof HistoryPaymentSlide>>(null);
     const loginModalRef = useRef<ComponentRef<typeof LoginModal>>(null);
     const infoSlideRef = useRef<ComponentRef<typeof InfoSlide>>(null);
     const historyPaymentModalRef = useRef<ComponentRef<typeof HistoryPaymentModal>>(null);
@@ -103,7 +105,16 @@ const MainHeader = () => {
             </div>
             <LoginSlide ref={loginSlideRef} />
             <LoginModal ref={loginModalRef} />
-            {userSubscription && <InfoSlide ref={infoSlideRef} userSubscription={userSubscription} />}
+            {userSubscription && (
+                <InfoSlide
+                    ref={infoSlideRef}
+                    userSubscription={userSubscription}
+                    showHistory={() => historyPaymentSlideRef.current?.open()}
+                />
+            )}
+            {userSubscription && (
+                <HistoryPaymentSlide ref={historyPaymentSlideRef} userSubscription={userSubscription} />
+            )}
             {userSubscription && (
                 <HistoryPaymentModal ref={historyPaymentModalRef} userSubscription={userSubscription} />
             )}

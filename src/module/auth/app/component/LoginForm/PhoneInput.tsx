@@ -34,7 +34,7 @@ const PhoneInput = ({ getOTP }: PhoneInputProps) => {
                         !!error ? "border-red-500" : focus ? "border-[#1FAEEB]" : "border-[#D1D5DB]"
                     )}
                 >
-                    <div className="border-r border-[#D1D5DB] bg-[#F9FAFB] p-3 flex gap-2 items-center">
+                    <div className="border-r border-[#D1D5DB] bg-[#F9FAFB] p-3 flex gap-2 items-center min-w-[98px]">
                         <img src="/images/vietnamphone.svg" alt="" className="w-8" />
                         <span className="text-sm text-[#1F2937]">(+84)</span>
                     </div>
