@@ -3,6 +3,7 @@ import { VerifyRecaptchaData } from "@module/auth/domain/dto/auth";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import OtpInput from "../LoginForm/OtpInput";
 import { FaChevronLeft } from "react-icons/fa";
+import { delay } from "@lib/util/functions";
 
 interface LoginModalHandler {
     open: (recaptchaData: VerifyRecaptchaData) => void;
@@ -40,9 +41,11 @@ const OtpInputSlide = forwardRef<LoginModalHandler, OtpInputSlideProps>(({ getOT
                 {recaptchaData && (
                     <OtpInput
                         recaptchaData={recaptchaData}
-                        onClose={() => {
+                        onClose={async () => {
                             onClose();
                             onLoginSuccess();
+                            await delay(200);
+                            document.body.style.overflow = "";
                         }}
                         getOTP={getOTP}
                     />
