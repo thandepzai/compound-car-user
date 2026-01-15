@@ -8,6 +8,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoChevronBack } from "react-icons/io5";
 import clsx from "clsx";
+import { useAutoScaleByHeight } from "@module/order/infras/hook/useAutoScaleByHeight";
+import { useWindowSize } from "@lib/hook/useWindowSize";
 
 const OrderView = () => {
     const { orderId } = useParams() || {};
@@ -19,6 +21,9 @@ const OrderView = () => {
     const { createOrderMutation } = OrderService.useOrderAction();
 
     const { user, isFetching } = AuthService.useUser();
+
+    const { deviceType } = useWindowSize();
+    const { scale, windowHeight } = useAutoScaleByHeight(936, deviceType !== "mobile" ? 550 / 936 : 1);
 
     useEffect(() => {
         if (!!orderId) setPlanId(Number(orderId));
@@ -53,10 +58,17 @@ const OrderView = () => {
     };
 
     return (
-        <div className="bg-[#f3f4f6] min-h-[calc(100vh-82px)] tab:py-3">
+        <div
+            className="bg-[#f3f4f6] min-h-[calc(100vh-82px)] tab:py-3"
+            style={{ height: deviceType !== "mobile" ? scale * 973 : "auto" }}
+        >
             <div
                 className="tab:border tab:border-[#EFF6FF] tab:rounded-2xl tab:p-8 tab:w-2xl bg-white mx-auto max-tab:px-4"
-                style={{ boxShadow: "0px 0px 4px 0px #00000026" }}
+                style={{
+                    boxShadow: "0px 0px 4px 0px #00000026",
+                    transform: `scale(${scale})`,
+                    transformOrigin: "top center"
+                }}
             >
                 <div className="h-20 flex py-4 tab:hidden">
                     <div onClick={() => router.push("/")} className="size-12 flex-center">
@@ -112,7 +124,9 @@ const OrderView = () => {
                                 <div className="text-sm leading-5 text-[#1F2937]">(+84)</div>
                             </div>
                             <input
-                                type="text"
+                                type="tel"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
                                 value={phone}
                                 readOnly
                                 onClick={() => {
@@ -136,7 +150,9 @@ const OrderView = () => {
                                 <div className="text-sm leading-5 text-[#1F2937]">(+84)</div>
                             </div>
                             <input
-                                type="text"
+                                type="tel"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
                                 placeholder="Nhập giới thiệu"
                                 className="flex-1 bg-white rounded-lg px-3 outline-none!"
                             />
@@ -158,7 +174,7 @@ const OrderView = () => {
                     Bấm “Thanh toán” đồng nghĩa việc bạn đọc và đồng ý với Điều khoản dịch vụ.
                 </div>
                 <div
-                    className="max-tab:w-screen max-tab:-ml-4 max-tab:p-4 max-tab:pb-10 mt-8 tab:shadow-none!"
+                    className="max-tab:sticky max-tab:bottom-0 max-tab:w-screen max-tab:-ml-4 max-tab:p-4 max-tab:pb-10 bg-white mt-8 tab:shadow-none!"
                     style={{ boxShadow: "0px 0px 4px 0px #00000026" }}
                 >
                     <div className="flex justify-between">

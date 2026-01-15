@@ -47,11 +47,11 @@ export const useInitWindownSize = () => {
 
     useIsomorphicLayoutEffect(() => {
         const getDeviceType = () => {
-            if (window.innerWidth < 730) {
+            if (window.innerWidth < 768) {
                 return "mobile";
-            } else if (window.innerWidth < 1080) {
+            } else if (window.innerWidth < 1024) {
                 return "tablet";
-            } else if (window.innerWidth < 1440) {
+            } else if (window.innerWidth < 1280) {
                 return "laptop";
             } else {
                 return "desktop";

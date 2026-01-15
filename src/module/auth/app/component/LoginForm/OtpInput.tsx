@@ -121,6 +121,25 @@ const OtpInput = ({ recaptchaData, onClose, getOTP }: OtpInputProps) => {
         );
     };
 
+    const onPasteOtp = (e: React.ClipboardEvent<HTMLInputElement>) => {
+        e.preventDefault();
+
+        const pastedText = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+
+        if (!pastedText) return;
+
+        const nextOtp = [...otp];
+
+        for (let i = 0; i < pastedText.length; i++) {
+            nextOtp[i] = pastedText[i];
+        }
+
+        setOtp(nextOtp);
+
+        const lastIndex = Math.min(pastedText.length - 1, 5);
+        inputsRef.current[lastIndex]?.focus();
+    };
+
     return (
         <div className="grid tab:grid-cols-2 max-tab:gap-3 mt-4">
             <div>
@@ -136,87 +155,105 @@ const OtpInput = ({ recaptchaData, onClose, getOTP }: OtpInputProps) => {
                 <div className="h-10 flex justify-center items-center gap-4">
                     <div className="w-20.5 h-10.5 grid grid-cols-2 border rounded-lg border-[#E5E7EB]">
                         <input
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             ref={(el) => {
                                 inputsRef.current[0] = el;
                             }}
+                            onPaste={onPasteOtp}
                             onChange={(e) => onChange(0, e.target.value)}
                             onKeyDown={(e) => onKeyDown(0, e)}
                             value={otp[0]}
-                            type="text"
                             name="input-1"
                             id="input-1"
-                            className="text-xs leading-4 border-r border-[#E5E7EB] outline-none!"
+                            className="font-semibold text-[#4B5563] leading-4 border-r border-[#E5E7EB] outline-none!"
                             style={{ paddingLeft: otp[0] === "" ? "18px" : "16px" }}
                         />
                         <input
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             ref={(el) => {
                                 inputsRef.current[1] = el;
                             }}
+                            onPaste={onPasteOtp}
                             onChange={(e) => onChange(1, e.target.value)}
                             onKeyDown={(e) => onKeyDown(1, e)}
                             value={otp[1]}
-                            type="text"
                             name="input-2"
                             id="input-2"
-                            className="text-xs leading-4 outline-none!"
+                            className="font-semibold text-[#4B5563] leading-4 outline-none!"
                             style={{ paddingLeft: otp[1] === "" ? "18px" : "16px" }}
                         />
                     </div>
                     <IoMdRemove className="w-3 h-px bg-[#D1D5DB]" />
                     <div className="w-20.5 h-10.5 grid grid-cols-2 border rounded-lg border-[#E5E7EB]">
                         <input
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             ref={(el) => {
                                 inputsRef.current[2] = el;
                             }}
+                            onPaste={onPasteOtp}
                             onChange={(e) => onChange(2, e.target.value)}
                             onKeyDown={(e) => onKeyDown(2, e)}
                             value={otp[2]}
-                            type="text"
                             name="input-3"
                             id="input-3"
-                            className="text-xs leading-4 border-r border-[#E5E7EB] outline-none!"
+                            className="font-semibold text-[#4B5563] leading-4 border-r border-[#E5E7EB] outline-none!"
                             style={{ paddingLeft: otp[2] === "" ? "18px" : "16px" }}
                         />
                         <input
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             ref={(el) => {
                                 inputsRef.current[3] = el;
                             }}
+                            onPaste={onPasteOtp}
                             onChange={(e) => onChange(3, e.target.value)}
                             onKeyDown={(e) => onKeyDown(3, e)}
                             value={otp[3]}
-                            type="text"
                             name="input-4"
                             id="input-4"
-                            className="text-xs leading-4 outline-none!"
+                            className="font-semibold text-[#4B5563] leading-4 outline-none!"
                             style={{ paddingLeft: otp[3] === "" ? "18px" : "16px" }}
                         />
                     </div>
                     <IoMdRemove className="w-3 h-px bg-[#D1D5DB]" />
                     <div className="w-20.5 h-10.5 grid grid-cols-2 border rounded-lg border-[#E5E7EB]">
                         <input
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             ref={(el) => {
                                 inputsRef.current[4] = el;
                             }}
+                            onPaste={onPasteOtp}
                             onChange={(e) => onChange(4, e.target.value)}
                             onKeyDown={(e) => onKeyDown(4, e)}
                             value={otp[4]}
-                            type="text"
                             name="input-5"
                             id="input-5"
-                            className="text-xs leading-4 border-r border-[#E5E7EB] outline-none!"
+                            className="font-semibold text-[#4B5563] leading-4 border-r border-[#E5E7EB] outline-none!"
                             style={{ paddingLeft: otp[4] === "" ? "18px" : "16px" }}
                         />
                         <input
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             ref={(el) => {
                                 inputsRef.current[5] = el;
                             }}
+                            onPaste={onPasteOtp}
                             onChange={(e) => onChange(5, e.target.value)}
                             onKeyDown={(e) => onKeyDown(5, e)}
                             value={otp[5]}
-                            type="text"
                             name="input-6"
                             id="input-6"
-                            className="text-xs leading-4 outline-none! pl-4"
+                            className="font-semibold text-[#4B5563] leading-4 outline-none! pl-4"
                             style={{ paddingLeft: otp[5] === "" ? "18px" : "16px" }}
                         />
                     </div>

@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 
@@ -39,7 +39,9 @@ const PhoneInput = ({ getOTP }: PhoneInputProps) => {
                         <span className="text-sm text-[#1F2937]">(+84)</span>
                     </div>
                     <input
-                        type="text"
+                        type="tel"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={phone}
                         onChange={(e) => {
                             setPhone(e.target.value ?? "");

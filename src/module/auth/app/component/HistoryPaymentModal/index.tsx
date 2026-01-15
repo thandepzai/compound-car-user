@@ -1,6 +1,6 @@
 import Modal from "@module/_core/app/component/Modal";
 import { forwardRef, useImperativeHandle, useState } from "react";
-import { UserSubscriptionDTO, VerifyRecaptchaData } from "@module/auth/domain/dto/auth";
+import { UserSubscriptionDTO } from "@module/auth/domain/dto/auth";
 import HistoryPayment from "../HistoryPayment";
 
 interface HistoryPaymentModalHandler {
@@ -20,7 +20,7 @@ const HistoryPaymentModal = forwardRef<HistoryPaymentModalHandler, HistoryPaymen
         const onClose = () => setIsModalOpen(false);
 
         return (
-            <Modal open={isModalOpen} className="w-[488px] mx-4 p-5!">
+            <Modal open={isModalOpen} className="w-[488px] mx-4 p-5!" onClose={onClose}>
                 <HistoryPayment onBack={onClose} userSubscription={userSubscription} />
             </Modal>
         );
