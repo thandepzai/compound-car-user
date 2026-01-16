@@ -6,22 +6,26 @@ import { ComponentRef, forwardRef, useImperativeHandle, useRef, useState } from 
 import PhoneInputSlide from "./PhoneInputSlide";
 import OtpInputSlide from "./OtpInputSlide";
 
-interface LoginModalHandler {
-    open: () => void;
+interface LoginSlideHandler {
+    open: (planId?: number) => void;
 }
 
-const LoginSlide = forwardRef<LoginModalHandler>((_, ref) => {
+const LoginSlide = forwardRef<LoginSlideHandler>((_, ref) => {
+    const [planId, setPlanId] = useState<number>();
+
     const phoneInputSlideRef = useRef<ComponentRef<typeof PhoneInputSlide>>(null);
     const otpInputSlideRef = useRef<ComponentRef<typeof OtpInputSlide>>(null);
 
     const { verifyRecaptchaMutation } = AuthService.useAuthAction();
 
     useImperativeHandle(ref, () => ({
-        open: () => phoneInputSlideRef.current?.open()
+        open: (planId) => {
+            setPlanId(planId);
+            phoneInputSlideRef.current?.open();
+        }
     }));
 
     const getOTP = async (phoneNumber: string, onSuccess?: () => void) => {
-
         if (!process.env.RECAPTCHA_KEY) return;
 
         if (typeof window !== "undefined" && window.grecaptcha && window.grecaptcha.enterprise) {
@@ -53,6 +57,7 @@ const LoginSlide = forwardRef<LoginModalHandler>((_, ref) => {
                 ref={otpInputSlideRef}
                 getOTP={getOTP}
                 onLoginSuccess={() => phoneInputSlideRef.current?.close()}
+                planId={planId}
             />
         </>
     );

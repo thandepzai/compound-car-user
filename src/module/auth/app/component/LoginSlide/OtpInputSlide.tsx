@@ -12,8 +12,9 @@ interface LoginModalHandler {
 interface OtpInputSlideProps {
     getOTP: (phoneNumber: string) => Promise<void>;
     onLoginSuccess: () => void;
+    planId?: number;
 }
-const OtpInputSlide = forwardRef<LoginModalHandler, OtpInputSlideProps>(({ getOTP, onLoginSuccess }, ref) => {
+const OtpInputSlide = forwardRef<LoginModalHandler, OtpInputSlideProps>(({ getOTP, onLoginSuccess, planId }, ref) => {
     const [open, setOpen] = useState(false);
     const [recaptchaData, setRecaptchaData] = useState<VerifyRecaptchaData>();
 
@@ -48,6 +49,7 @@ const OtpInputSlide = forwardRef<LoginModalHandler, OtpInputSlideProps>(({ getOT
                             document.body.style.overflow = "";
                         }}
                         getOTP={getOTP}
+                        planId={planId}
                     />
                 )}
             </div>

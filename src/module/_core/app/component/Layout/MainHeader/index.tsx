@@ -1,6 +1,5 @@
 "use client";
 import LoginModal from "@module/auth/app/component/LoginModal";
-import { ComponentRef, useRef } from "react";
 import RecaptchaProvider from "../../RecaptchaProvider";
 import { AuthService } from "@module/auth/domain/service/auth";
 import { FiChevronUp } from "react-icons/fi";
@@ -14,15 +13,13 @@ import InfoSlide from "@module/auth/app/component/InfoSlide";
 import HistoryPaymentModal from "@module/auth/app/component/HistoryPaymentModal";
 import clsx from "clsx";
 import HistoryPaymentSlide from "@module/auth/app/component/HistoryPaymentSlide";
+import { authUIController } from "@module/auth/infras/util/authUIController";
 
 const MainHeader = () => {
     const pathname = usePathname();
     const router = useRouter();
-    const loginSlideRef = useRef<ComponentRef<typeof LoginSlide>>(null);
-    const historyPaymentSlideRef = useRef<ComponentRef<typeof HistoryPaymentSlide>>(null);
-    const loginModalRef = useRef<ComponentRef<typeof LoginModal>>(null);
-    const infoSlideRef = useRef<ComponentRef<typeof InfoSlide>>(null);
-    const historyPaymentModalRef = useRef<ComponentRef<typeof HistoryPaymentModal>>(null);
+    const { loginModalRef, loginSlideRef, infoSlideRef, historyPaymentSlideRef, historyPaymentModalRef } =
+        authUIController;
 
     const { isFetching, userSubscription } = AuthService.useUserSubscription();
     const { logout } = AuthService;
@@ -37,7 +34,7 @@ const MainHeader = () => {
             )}
         >
             <div className="mx-auto px-4 tab:px-6 lap:px-12 desk:px-4 h-[72px] tab:h-20 flex items-center justify-between max-w-[1184px]">
-                <img onClick={() => router.push("/")} src="/images/logo.svg" alt="" className="w-[186px] h-12" />
+                <img onClick={() => router.push("/")} src="/images/logo.svg" alt="" className="w-[186px] h-12 cursor-pointer" />
                 {!isFetching ? (
                     !!userSubscription ? (
                         <div className="relative group">
@@ -103,8 +100,8 @@ const MainHeader = () => {
                     )
                 ) : null}
             </div>
-            <LoginSlide ref={loginSlideRef} />
             <LoginModal ref={loginModalRef} />
+            <LoginSlide ref={loginSlideRef} />
             {userSubscription && (
                 <InfoSlide
                     ref={infoSlideRef}

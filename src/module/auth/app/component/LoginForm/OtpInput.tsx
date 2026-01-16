@@ -1,8 +1,10 @@
 import { showToast } from "@lib/component/Toast/Toast";
 import { ToastType } from "@lib/component/Toast/type";
+import { delay } from "@lib/util/functions";
 import { VerifyRecaptchaData } from "@module/auth/domain/dto/auth";
 import { AuthService } from "@module/auth/domain/service/auth";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IoMdRemove } from "react-icons/io";
 
@@ -10,10 +12,12 @@ interface OtpInputProps {
     recaptchaData: VerifyRecaptchaData;
     onClose: () => void;
     getOTP: (phoneNumber: string, onSuccess?: () => void) => Promise<void>;
+    planId?: number;
 }
 
 const TIME_LEFT = 60;
-const OtpInput = ({ recaptchaData, onClose, getOTP }: OtpInputProps) => {
+const OtpInput = ({ recaptchaData, onClose, getOTP, planId }: OtpInputProps) => {
+    const router = useRouter();
     const { phoneNumber, expiresAt, sessionId } = recaptchaData;
 
     const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
@@ -104,12 +108,16 @@ const OtpInput = ({ recaptchaData, onClose, getOTP }: OtpInputProps) => {
         verifyOTPMutation.mutate(
             { otpCode, phoneNumber, sessionId },
             {
-                onSuccess: () => {
+                onSuccess: async () => {
                     showToast({
                         type: ToastType.SUCCESS,
                         description: "Đăng nhập thành công"
                     });
                     onClose();
+                    if (!!planId) {
+                        await delay(250);
+                        router.push(`/orders/${planId}`);
+                    }
                 },
                 onError: (error: any) => {
                     showToast({

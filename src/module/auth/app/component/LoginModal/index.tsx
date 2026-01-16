@@ -10,17 +10,21 @@ import { showToast } from "@lib/component/Toast/Toast";
 import { ToastType } from "@lib/component/Toast/type";
 
 interface LoginModalHandler {
-    open: () => void;
+    open: (planId?: number) => void;
 }
 
 const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [planId, setPlanId] = useState<number>();
     const [recaptchaData, setRecaptchaData] = useState<VerifyRecaptchaData>();
 
     const { verifyRecaptchaMutation } = AuthService.useAuthAction();
 
     useImperativeHandle(ref, () => ({
-        open: () => setIsModalOpen(true)
+        open: (planId) => {
+            setIsModalOpen(true);
+            setPlanId(planId);
+        }
     }));
 
     const onClose = () => {
@@ -67,7 +71,7 @@ const LoginModal = forwardRef<LoginModalHandler>((_, ref) => {
             {!recaptchaData ? (
                 <PhoneInput getOTP={getOTP} />
             ) : (
-                <OtpInput recaptchaData={recaptchaData} onClose={onClose} getOTP={getOTP} />
+                <OtpInput recaptchaData={recaptchaData} onClose={onClose} getOTP={getOTP} planId={planId} />
             )}
         </Modal>
     );

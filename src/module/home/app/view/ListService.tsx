@@ -1,6 +1,9 @@
 import { showToast } from "@lib/component/Toast/Toast";
 import { ToastType } from "@lib/component/Toast/type";
+import { useWindowSize } from "@lib/hook/useWindowSize";
 import { AuthService } from "@module/auth/domain/service/auth";
+import { authUIController } from "@module/auth/infras/util/authUIController";
+import { HomeService } from "@module/home/domain/service/home";
 import { useRouter } from "next/navigation";
 import { FaCheck } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
@@ -9,16 +12,18 @@ const ListService = () => {
     const router = useRouter();
 
     const { isLogin } = AuthService.useUser();
+    const { deviceType } = useWindowSize();
 
-    const getOrder = (orderId: number) => {
+    const getOrder = (planId: number) => {
         if (!isLogin) {
             showToast({
                 type: ToastType.ERROR,
                 description: "Vui lòng đăng nhập để đăng ký gói"
             });
+            authUIController.handleCheckoutWithAuth(deviceType === "mobile", planId);
             return;
         }
-        router.push(`/orders/${orderId}`);
+        router.push(`/orders/${planId}`);
     };
 
     return (
